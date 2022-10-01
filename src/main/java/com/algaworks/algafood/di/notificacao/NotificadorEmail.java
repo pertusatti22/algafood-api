@@ -1,10 +1,6 @@
 package com.algaworks.algafood.di.notificacao;
 
 import com.algaworks.algafood.di.modelo.Cliente;
-import org.springframework.stereotype.Component;
-
-import java.util.Locale;
-
 
 public class NotificadorEmail implements Notificador {
 

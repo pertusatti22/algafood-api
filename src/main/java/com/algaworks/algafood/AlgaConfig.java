@@ -1,6 +1,7 @@
 package com.algaworks.algafood;
 
 import com.algaworks.algafood.di.notificacao.NotificadorEmail;
+import com.algaworks.algafood.di.service.AtivacaoClienteService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,4 +16,9 @@ public class AlgaConfig {
         return notificador;
     }
 
+    @Bean //para funcionar é necessário passar o notificarEmail no construtor e funciona pq ele é um bean spring também
+    public AtivacaoClienteService ativacaoClienteService() {
+        return new AtivacaoClienteService(notificadorEmail());
+    }
 }
+
