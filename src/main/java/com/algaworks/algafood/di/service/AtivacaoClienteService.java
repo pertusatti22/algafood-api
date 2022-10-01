@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AtivacaoClienteService {
 
+    @Autowired
     private Notificador notificador;
 
 //    @Autowired
@@ -23,8 +24,8 @@ public class AtivacaoClienteService {
         notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
     }
 
-    @Autowired // Ponto de injeção via setter
-    public void setNotificador(Notificador notificador) {
-        this.notificador = notificador;
-    }
+//    @Autowired // Ponto de injeção via setter
+//    public void setNotificador(Notificador notificador) {
+//        this.notificador = notificador;
+//    }
 }
