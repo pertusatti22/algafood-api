@@ -13,19 +13,19 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.List;
 
-@Component
+//@Component
 public class AtivacaoClienteService {
 
     @TipoDoNotificador(NivelUrgencia.SEM_URGENCIA)
     @Autowired
     private Notificador notificador;
 
-    @PostConstruct
+    //@PostConstruct
     public void init() {
         System.out.println("INIT " + notificador);
     }
 
-    @PreDestroy
+    //@PreDestroy
     public void destroy() {
         System.out.println("DESTROY");
     }
