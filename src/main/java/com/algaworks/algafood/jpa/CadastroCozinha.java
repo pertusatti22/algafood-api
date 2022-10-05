@@ -2,6 +2,7 @@ package com.algaworks.algafood.jpa;
 
 import com.algaworks.algafood.domain.model.Cozinha;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,5 +18,11 @@ public class CadastroCozinha {
         return manager
                 .createQuery("from Cozinha", Cozinha.class)
                 .getResultList();
+    }
+
+    @Transactional
+    public Cozinha adicionar(Cozinha cozinha) {
+        // Dessa forma o merge está retornando a instância já persistida no banco de dados
+        return manager.merge(cozinha);
     }
 }
