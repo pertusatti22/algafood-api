@@ -20,6 +20,10 @@ public class CadastroCozinha {
                 .getResultList();
     }
 
+    public Cozinha buscar(Long id) {
+        return manager.find(Cozinha.class, id);
+    }
+
     @Transactional
     public Cozinha adicionar(Cozinha cozinha) {
         // Dessa forma o merge está retornando a instância já persistida no banco de dados
