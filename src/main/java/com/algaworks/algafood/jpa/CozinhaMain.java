@@ -25,13 +25,20 @@ public class CozinhaMain {
         cozinha2.setNome("Árabe");
 
         // atribuindo na variável estamos retornando a instância ja persistida
-        cozinha1 = cadastroCozinha.adicionar(cozinha1);
-        cadastroCozinha.adicionar(cozinha2);
+        cozinha1 = cadastroCozinha.salvar(cozinha1);
+        cadastroCozinha.salvar(cozinha2);
 
         System.out.println(cadastroCozinha.buscar(cozinha1.getId()));
 
         Cozinha testeCozinha = cadastroCozinha.buscar(1L);
         System.out.println("Teste Cozinha: " + testeCozinha.getNome());
+
+        // Usando salvar para update
+        cozinha2.setId(6L);
+        cozinha2.setNome("Persa");
+
+        cadastroCozinha.salvar(cozinha2);
+
 
         List<Cozinha> cozinhas = cadastroCozinha.listar();
 
