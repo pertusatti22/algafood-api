@@ -2,6 +2,7 @@ package com.algaworks.algafood.jpa;
 
 import com.algaworks.algafood.AlgafoodApiApplication;
 import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +17,7 @@ public class CozinhaMain {
                 .run(args);
 
 
-        CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
+        CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 
         Cozinha cozinha1 = new Cozinha();
         cozinha1.setNome("Japonesa");
@@ -25,26 +26,26 @@ public class CozinhaMain {
         cozinha2.setNome("Árabe");
 
         // atribuindo na variável estamos retornando a instância ja persistida
-        cozinha1 = cadastroCozinha.salvar(cozinha1);
-        cadastroCozinha.salvar(cozinha2);
+        cozinha1 = cozinhaRepository.salvar(cozinha1);
+        cozinhaRepository.salvar(cozinha2);
 
-        System.out.println(cadastroCozinha.buscar(cozinha1.getId()));
+        System.out.println(cozinhaRepository.buscar(cozinha1.getId()));
 
-        Cozinha testeCozinha = cadastroCozinha.buscar(1L);
+        Cozinha testeCozinha = cozinhaRepository.buscar(1L);
         System.out.println("Teste Cozinha: " + testeCozinha.getNome());
 
         // Usando salvar para update
         cozinha2.setId(6L);
         cozinha2.setNome("Persa");
 
-        cadastroCozinha.salvar(cozinha2);
+        cozinhaRepository.salvar(cozinha2);
 
         //teste de exclusão
 //        Cozinha cozinha = new Cozinha();
 //        cozinha.setId(1L);
-//        cadastroCozinha.remover(cozinha);
+//        cozinhaRepository.remover(cozinha);
 
-        List<Cozinha> cozinhas = cadastroCozinha.listar();
+        List<Cozinha> cozinhas = cozinhaRepository.listar();
 
         for (Cozinha c:cozinhas) {
             System.out.println(c.getNome());
