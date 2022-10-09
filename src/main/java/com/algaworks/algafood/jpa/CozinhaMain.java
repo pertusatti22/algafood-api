@@ -39,11 +39,15 @@ public class CozinhaMain {
 
         cadastroCozinha.salvar(cozinha2);
 
+        //teste de exclusão
+//        Cozinha cozinha = new Cozinha();
+//        cozinha.setId(1L);
+//        cadastroCozinha.remover(cozinha);
 
         List<Cozinha> cozinhas = cadastroCozinha.listar();
 
-        for (Cozinha cozinha:cozinhas) {
-            System.out.println(cozinha.getNome());
+        for (Cozinha c:cozinhas) {
+            System.out.println(c.getNome());
         }
     }
 }
