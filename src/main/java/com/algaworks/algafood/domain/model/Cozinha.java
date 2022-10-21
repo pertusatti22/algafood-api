@@ -15,13 +15,11 @@ import javax.persistence.*;
 @Entity
 public class Cozinha {
 
-    @JsonIgnore
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty(value = "titulo")
     @Column(nullable = false)
     private String nome;
 
