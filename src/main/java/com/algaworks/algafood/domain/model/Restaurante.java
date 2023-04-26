@@ -34,6 +34,10 @@ public class Restaurante {
     private Cozinha cozinha;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "restaurante")
+    private List<Produto> produtos = new ArrayList<>();
+
+    @JsonIgnore
     @Embedded
     private Endereco endereco;
 
