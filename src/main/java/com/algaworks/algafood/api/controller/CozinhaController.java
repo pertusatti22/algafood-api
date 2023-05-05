@@ -19,7 +19,6 @@ public class CozinhaController {
     @Autowired
     private CozinhaRepository cozinhaRepository;
 
-
     @GetMapping
     public List<Cozinha> listar() {
         return cozinhaRepository.findAll();
