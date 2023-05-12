@@ -19,21 +19,18 @@ class CadastroCozinhaIntegrationTest {
     private CadastroCozinhaService cadastroCozinha;
 
     @Test
-    public void testarCadastroCozinhaComSucesso() { // HappyPath
-        // Cenário
+    public void atribuiIdQuandoDadosCozinhaCorretos() {
         Cozinha novaCozinha = new Cozinha();
         novaCozinha.setNome("Chinesa");
 
-        // Ação
         novaCozinha = cadastroCozinha.salvar(novaCozinha);
 
-        // Validação
         assertThat(novaCozinha).isNotNull();
         assertThat(novaCozinha.getId()).isNotNull();
     }
 
     @Test
-    public void testarCadastroCozinhaSemNome() { //UnhappyPath
+    public void execaoQuandoCozinhaSemNome() {
         Cozinha novaCozinha = new Cozinha();
         novaCozinha.setNome(null);
 
