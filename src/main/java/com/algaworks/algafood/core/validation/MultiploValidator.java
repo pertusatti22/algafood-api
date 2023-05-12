@@ -24,8 +24,6 @@ public class MultiploValidator implements ConstraintValidator<Multiplo, Number> 
 
             valido = BigDecimal.ZERO.compareTo(resto) == 0;
         }
-        
-
         return valido;
     }
 }
