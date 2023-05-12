@@ -30,14 +30,14 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Nome é Obrigatório")
     @Column(nullable = false)
     private String nome;
 
     @PositiveOrZero
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
-    
+
     @Valid
     @ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
     @NotNull
