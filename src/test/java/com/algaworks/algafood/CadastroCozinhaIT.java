@@ -15,7 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @SpringBootTest
-class CadastroCozinhaIntegrationTest {
+class CadastroCozinhaIT {
 
     @Autowired
     private CadastroCozinhaService cadastroCozinha;
