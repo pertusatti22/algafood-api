@@ -42,7 +42,7 @@ class CadastroCozinhaApi {
         RestAssured.port = port;
         RestAssured.basePath = "/cozinhas";
 
-        jsonCorretoCozinhaChinesa = ResourceUtils.getContentFromResource("/json/test_cadastro_cozinha.json");
+        jsonCorretoCozinhaChinesa = ResourceUtils.getContentFromResource("/json/correto/cozinha_chinesa.json");
 
         databaseCleaner.clearTables();
         prepararDados();
