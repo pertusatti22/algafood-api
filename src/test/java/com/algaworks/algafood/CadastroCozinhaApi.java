@@ -2,6 +2,7 @@ package com.algaworks.algafood;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -13,19 +14,21 @@ import static org.hamcrest.Matchers.hasSize;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CadastroCozinhaApiTest {
+class CadastroCozinhaApi {
 
     @LocalServerPort
     private int port;
 
+    @BeforeEach
+    public void setUp() {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        RestAssured.port = port;
+        RestAssured.basePath = "/cozinhas";
+    }
+
     @Test
     public void deveRetornarStatus200_quandoConsultarCozinhas() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-
-
         given()
-                .basePath("/cozinhas")
-                .port(port)
                 .accept(ContentType.JSON)
                 .when()
                 .get()
@@ -35,12 +38,9 @@ class CadastroCozinhaApiTest {
 
     @Test
     public void deveConter4Cozinhas_quandoListarCozinhas() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 
 
         given()
-                .basePath("/cozinhas")
-                .port(port)
                 .accept(ContentType.JSON)
                 .when()
                 .get()
