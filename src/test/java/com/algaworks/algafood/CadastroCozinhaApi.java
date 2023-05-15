@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.TestPropertySource;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItems;
@@ -16,6 +17,7 @@ import static org.hamcrest.Matchers.hasSize;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource("/application-test.properties")
 class CadastroCozinhaApi {
 
     @LocalServerPort
