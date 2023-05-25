@@ -15,9 +15,9 @@ public abstract class RestauranteMixin {
     private Cozinha cozinha;
     @JsonIgnore
     private Endereco endereco;
-    //@JsonIgnore
+    @JsonIgnore
     private OffsetDateTime dataCadastro;
-    //@JsonIgnore
+    @JsonIgnore
     private OffsetDateTime dataAtualizacao;
     @JsonIgnore
     private List<FormaPagamento> formasPagamento;
