@@ -36,7 +36,9 @@ public class EstadoController {
 
     @GetMapping("/{estadoId}")
     public EstadoModel buscar(@PathVariable Long estadoId) {
-        return estadoModelAssembler.toModel(cadastroEstadoService.encontrar(estadoId));
+
+        return estadoModelAssembler.toModel(
+                cadastroEstadoService.encontrar(estadoId));
     }
 
     @PostMapping
@@ -67,6 +69,7 @@ public class EstadoController {
     @DeleteMapping("/{estadoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long estadoId) {
+
         cadastroEstadoService.remover(estadoId);
     }
 }
