@@ -12,6 +12,9 @@ delete from restaurante;
 delete from restaurante_forma_pagamento;
 delete from usuario;
 delete from usuario_grupo;
+delete from restaurante_usuario_responsavel;
+delete from pedido;
+delete from item_pedido;
 
 set foreign_key_checks = 1;
 
@@ -81,15 +84,10 @@ insert into grupo (id, nome) values (1, 'Gerente'), (2, 'Vendedor'), (3, 'Secret
 
 insert into usuario_grupo (usuario_id, grupo_id) values (1,1),(1,2),(2,2);
 
-delete from restaurante_usuario_responsavel;
-
 insert into usuario (id, nome, email, senha, data_cadastro) values
 (5, 'Manoel Lima', 'manoel.loja@gmail.com', '123', utc_timestamp);
 
 insert into restaurante_usuario_responsavel (restaurante_id, usuario_id) values (1, 5), (3, 5);
-
-delete from pedido;
-delete from item_pedido;
 
 insert into pedido (id, restaurante_id, usuario_cliente_id, forma_pagamento_id, endereco_cidade_id, endereco_cep, 
     endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro,
