@@ -45,9 +45,9 @@ public class PedidoController {
         return pedidoResumoModelAssembler.toCollectionModel(todosPedidos);
     }
 
-    @GetMapping("/{pedidoId}")
-    public PedidoModel buscar(@PathVariable Long pedidoId) {
-        Pedido pedido = emissaoPedidoService.encontrar(pedidoId);
+    @GetMapping("/{codigoPedido}")
+    public PedidoModel buscar(@PathVariable String codigoPedido) {
+        Pedido pedido = emissaoPedidoService.encontrar(codigoPedido);
 
         return pedidoModelAssembler.toModel(pedido);
     }
@@ -62,7 +62,7 @@ public class PedidoController {
             novoPedido.getCliente().setId(1L);
 
             novoPedido = emissaoPedidoService.emitir(novoPedido);
-            
+
             return pedidoModelAssembler.toModel(novoPedido);
         } catch (EntidadeNaoEncontradaException e) {
             throw new NegocioException(e.getMessage());

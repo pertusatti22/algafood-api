@@ -30,9 +30,9 @@ public class EmissaoPedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public Pedido encontrar(Long pedidoId) {
-        return pedidoRepository.findById(pedidoId)
-                .orElseThrow(() -> new PedidoNaoEncontradoException(pedidoId));
+    public Pedido encontrar(String codigoPedido) {
+        return pedidoRepository.findByCodigo(codigoPedido)
+                .orElseThrow(() -> new PedidoNaoEncontradoException(codigoPedido));
     }
 
     @Transactional
