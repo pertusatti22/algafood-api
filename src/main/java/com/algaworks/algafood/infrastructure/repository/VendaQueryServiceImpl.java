@@ -21,12 +21,25 @@ public class VendaQueryServiceImpl implements VendaQueryService {
     private EntityManager manager;
 
     @Override
-    public List<VendaDiaria> consultarVendasDiarias(VendaDiariaFilter filtro) {
+    public List<VendaDiaria> consultarVendasDiarias(VendaDiariaFilter filtro, String timeOffset) {
         var builder = manager.getCriteriaBuilder();
         var query = builder.createQuery(VendaDiaria.class);
         var root = query.from(Pedido.class);
 
         var predicates = new ArrayList<Predicate>();
+
+        var functionConvertTzDataCriacao = builder.function(
+                "convert_tz", Date.class,
+                root.get("dataCriacao"), builder.literal("+00:00"), builder.literal(timeOffset));
+
+        var functionDateDataCriacao = builder.function(
+                "date", Date.class, functionConvertTzDataCriacao);
+
+        var selection = builder.construct(VendaDiaria.class,
+                functionDateDataCriacao,
+                builder.count(root.get("id")),
+                builder.sum(root.get("valorTotal"))
+        );
 
         if (filtro.getRestauranteId() != null) {
             predicates.add(builder.equal(root.get("restaurante"), filtro.getRestauranteId()));
@@ -42,14 +55,6 @@ public class VendaQueryServiceImpl implements VendaQueryService {
 
         predicates.add(root.get("status").in(StatusPedido.CONFIRMADO, StatusPedido.ENTREGUE));
 
-        var functionDateDataCriacao = builder.function(
-                "date", Date.class, root.get("dataCriacao"));
-
-        var selection = builder.construct(VendaDiaria.class,
-                functionDateDataCriacao,
-                builder.count(root.get("id")),
-                builder.sum(root.get("valorTotal"))
-        );
 
         query.select(selection);
         query.groupBy(functionDateDataCriacao);
