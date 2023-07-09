@@ -1,7 +1,6 @@
 package com.algaworks.algafood.core.storage;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +15,9 @@ public class AmazonS3Config {
 
     @Bean
     public AmazonS3 amazonS3() {
-        var credentials = new BasicAWSCredentials(
-                storageProperties.getS3().getIdChaveAcesso(),
-                storageProperties.getS3().getChaveAcessoSecreta());
 
         return AmazonS3ClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
                 .withRegion(storageProperties.getS3().getRegiao())
                 .build();
     }
