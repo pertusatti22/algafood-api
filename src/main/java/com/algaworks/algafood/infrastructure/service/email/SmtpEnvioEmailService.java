@@ -27,11 +27,12 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
     @Override
     public void enviar(Mensagem mensagem) {
         try {
+            
             String corpo = processarTemplate(mensagem);
 
             MimeMessage mimeMessage = mailSender.createMimeMessage();
-
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+
             helper.setFrom(emailProperties.getRemetente());
             helper.setTo(mensagem.getDestinatarios().toArray(new String[0]));
             helper.setSubject(mensagem.getAssunto());
@@ -45,7 +46,7 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
         }
     }
 
-    private String processarTemplate(Mensagem mensagem) {
+    protected String processarTemplate(Mensagem mensagem) {
         try {
             Template template = freemarkerConfiguration.getTemplate(mensagem.getCorpo());
 
