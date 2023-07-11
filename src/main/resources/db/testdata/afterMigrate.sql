@@ -83,7 +83,7 @@ insert into usuario (id, nome, email, senha, data_cadastro) values
 (3, 'José Souza', 'jose.aux@algafood.com', '123', utc_timestamp),
 (4, 'Sebastião Martins', 'sebastiao.cad@algafood.com', '123', utc_timestamp),
 (5, 'Manoel Lima', 'manoel.loja@gmail.com', '123', utc_timestamp),
-(6, 'Jack','pertusatti22@gmail.com', '123', utc_timestamp);
+(6, 'Jack','pertusatti22+jack@gmail.com', '123', utc_timestamp);
 
 insert into grupo (id, nome) values (1, 'Gerente'), (2, 'Vendedor'), (3, 'Secretária'), (4, 'Cadastrador');
 

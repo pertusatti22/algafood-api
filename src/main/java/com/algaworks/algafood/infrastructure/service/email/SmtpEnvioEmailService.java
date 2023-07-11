@@ -21,6 +21,7 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
     @Override
     public void enviar(Mensagem mensagem) {
         try {
+
             MimeMessage mimeMessage = mailSender.createMimeMessage();
 
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
@@ -30,6 +31,8 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
             helper.setText(mensagem.getCorpo(), true);
 
             mailSender.send(mimeMessage);
+
+
         } catch (Exception e) {
             throw new EmailException("Não foi possível enviar e-mail.", e);
         }
