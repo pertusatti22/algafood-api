@@ -4,21 +4,23 @@ import com.algaworks.algafood.api.assembler.RestauranteInputDisassembler;
 import com.algaworks.algafood.api.assembler.RestauranteModelAssembler;
 import com.algaworks.algafood.api.model.RestauranteModel;
 import com.algaworks.algafood.api.model.input.RestauranteInput;
+import com.algaworks.algafood.api.model.view.RestauranteView;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.exception.RestauranteNaoEncontradoException;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.algaworks.algafood.domain.service.CadastroRestauranteService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+
+@CrossOrigin("http://127.0.0.1:5500/")
 @RestController
 @RequestMapping("/restaurantes")
 public class RestauranteController {
@@ -36,26 +38,21 @@ public class RestauranteController {
     private RestauranteInputDisassembler restauranteInputDisassembler;
 
     @GetMapping
-    public ResponseEntity<List<RestauranteModel>> listar() {
-        List<RestauranteModel> restaurantesModel = restauranteModelAssembler
-                .toCollectionModel(restauranteRepository.findAll());
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://127.0.0.1:5500")
-                .body(restaurantesModel);
+    public List<RestauranteModel> listar() {
+        return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
     }
 
-//    @JsonView(RestauranteView.Resumo.class)
-//    @GetMapping(params = "projecao=resumo")
-//    public List<RestauranteModel> listarResumido() {
-//        return listar();
-//    }
+    @JsonView(RestauranteView.Resumo.class)
+    @GetMapping(params = "projecao=resumo")
+    public List<RestauranteModel> listarResumido() {
+        return listar();
+    }
 
-//    @JsonView(RestauranteView.Nomes.class)
-//    @GetMapping(params = "projecao=apenas-nome")
-//    public List<RestauranteModel> listarApenasNomes() {
-//        return listar();
-//    }
+    @JsonView(RestauranteView.Nomes.class)
+    @GetMapping(params = "projecao=apenas-nome")
+    public List<RestauranteModel> listarApenasNomes() {
+        return listar();
+    }
 
     @GetMapping("/{restauranteId}")
     public RestauranteModel buscar(@PathVariable Long restauranteId) {
