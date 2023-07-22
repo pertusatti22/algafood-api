@@ -16,5 +16,4 @@ public class SpringFoxConfig {
                 .apis(RequestHandlerSelectors.any())
                 .build();
     }
-
 }
