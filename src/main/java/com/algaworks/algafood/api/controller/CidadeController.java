@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/cidades", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/cidades")
 public class CidadeController implements CidadeControllerOpenApi {
 
     @Autowired
@@ -33,17 +33,17 @@ public class CidadeController implements CidadeControllerOpenApi {
     private CidadeInputDisassembler cidadeInputDisassembler;
 
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CidadeModel> listar() {
         return cidadeModelAssembler.toCollectionModel(cidadeRepository.findAll());
     }
 
-    @GetMapping("/{cidadeId}")
+    @GetMapping(path = "/{cidadeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CidadeModel buscar(@PathVariable Long cidadeId) {
         return cidadeModelAssembler.toModel(cadastroCidadeService.encontrar(cidadeId));
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public CidadeModel adicionar(@RequestBody @Valid CidadeInput cidadeInput) {
         try {
             Cidade cidade = cidadeInputDisassembler.toDomainObject(cidadeInput);
@@ -54,7 +54,7 @@ public class CidadeController implements CidadeControllerOpenApi {
         }
     }
 
-    @PutMapping("/{cidadeId}")
+    @PutMapping(path = "/{cidadeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInput cidadeInput) {
         try {
             Cidade cidadeAtual = cadastroCidadeService.encontrar(cidadeId);

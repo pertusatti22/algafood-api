@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/grupos")
 public class GrupoController implements GrupoControllerOpenApi {
 
     @Autowired
@@ -31,20 +31,20 @@ public class GrupoController implements GrupoControllerOpenApi {
     @Autowired
     private GrupoInputDisassembler grupoInputDisassembler;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<GrupoModel> listar() {
 
         return grupoModelAssembler.toCollectionModel(grupoRepository.findAll());
     }
 
-    @GetMapping("/{grupoId}")
+    @GetMapping(path = "/{grupoId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GrupoModel buscar(@PathVariable Long grupoId) {
 
         return grupoModelAssembler.toModel(
                 cadastroGrupoService.encontrar(grupoId));
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public GrupoModel adicionar(@RequestBody @Valid GrupoInput grupoInput) {
         try {
@@ -56,7 +56,7 @@ public class GrupoController implements GrupoControllerOpenApi {
         }
     }
 
-    @PutMapping("/{grupoId}")
+    @PutMapping(path = "/{grupoId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GrupoModel atualizar(@PathVariable Long grupoId, @RequestBody @Valid GrupoInput grupoInput) {
         try {
             Grupo grupoAtual = cadastroGrupoService.encontrar(grupoId);
