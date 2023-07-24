@@ -17,8 +17,7 @@ public interface PedidoControllerOpenApi {
                     name = "campos", paramType = "query", type = "string")
     })
     @ApiOperation("Lista os pedidos")
-    Page<PedidoResumoModel> pesquisar(PedidoFilter filtro,
-                                      Pageable pageable);
+    Page<PedidoResumoModel> pesquisar(PedidoFilter filtro, Pageable pageable);
 
     @ApiOperation("Registra um pedido")
     @ApiResponses({

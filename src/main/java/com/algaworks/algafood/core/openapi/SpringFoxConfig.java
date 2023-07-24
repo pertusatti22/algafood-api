@@ -7,6 +7,7 @@ import com.algaworks.algafood.api.openapi.model.CozinhasModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.PageableModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.PedidosResumoModelOpenApi;
 import com.fasterxml.classmate.TypeResolver;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -24,6 +25,7 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.service.Response;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.json.JacksonModuleRegistrar;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.Arrays;
@@ -142,5 +144,8 @@ public class SpringFoxConfig {
                         q -> q.name("Problema").namespace("com.algaworks.algafood.api.exceptionhandler")))));
     }
 
-
+    @Bean
+    public JacksonModuleRegistrar springFoxJacksonConfig() {
+        return objectMapper -> objectMapper.registerModule(new JavaTimeModule());
+    }
 }

@@ -67,7 +67,7 @@ public class PedidoController implements PedidoControllerOpenApi {
             @ApiImplicitParam(value = "Nomes das propriedades para filtrar na resposta, separados por vírgula",
                     name = "campos", paramType = "query", type = "string")
     })
-    @GetMapping(path = "/{codigoPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{codigoPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
     public PedidoModel buscar(@PathVariable String codigoPedido) {
         Pedido pedido = emissaoPedidoService.encontrar(codigoPedido);
 
