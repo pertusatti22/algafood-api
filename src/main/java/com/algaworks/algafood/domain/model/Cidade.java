@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
+
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
