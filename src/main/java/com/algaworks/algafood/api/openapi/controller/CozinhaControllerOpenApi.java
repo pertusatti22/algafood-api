@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @Api(tags = "Cozinhas")
-public interface CozinhasControllerOpenApi {
+public interface CozinhaControllerOpenApi {
 
     @ApiOperation("Lista as cozinhas")
     Page<CozinhaModel> listar(Pageable pageable);

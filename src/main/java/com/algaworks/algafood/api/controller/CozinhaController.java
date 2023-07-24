@@ -4,7 +4,7 @@ import com.algaworks.algafood.api.assembler.CozinhaInputDisassembler;
 import com.algaworks.algafood.api.assembler.CozinhaModelAssembler;
 import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.api.model.input.CozinhaInput;
-import com.algaworks.algafood.api.openapi.controller.CozinhasControllerOpenApi;
+import com.algaworks.algafood.api.openapi.controller.CozinhaControllerOpenApi;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Cozinha;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/cozinhas")
-public class CozinhaController implements CozinhasControllerOpenApi {
+public class CozinhaController implements CozinhaControllerOpenApi {
 
     @Autowired
     private CadastroCozinhaService cadastroCozinhaService;
