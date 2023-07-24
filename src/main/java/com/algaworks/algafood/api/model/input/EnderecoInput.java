@@ -20,7 +20,7 @@ public class EnderecoInput {
     @NotBlank
     private String logradouro;
 
-    @ApiModelProperty(example = "1500", required = true)
+    @ApiModelProperty(example = "\"1500\"", required = true)
     @NotBlank
     private String numero;
 
@@ -30,7 +30,7 @@ public class EnderecoInput {
     @ApiModelProperty(example = "Centro", required = true)
     @NotBlank
     private String bairro;
-    
+
     @Valid
     @NotNull
     private CidadeIdInput cidade;
