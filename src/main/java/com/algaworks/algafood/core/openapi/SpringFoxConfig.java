@@ -7,11 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.ResponseBuilder;
+import springfox.documentation.builders.*;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.Response;
@@ -21,6 +19,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 @Configuration
 @Import({BeanValidatorPluginsConfiguration.class})
@@ -59,6 +58,8 @@ public class SpringFoxConfig {
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                         .description("Erro interno do Servidor")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(getProblemaModelReference())
                         .build(),
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()))
@@ -72,10 +73,14 @@ public class SpringFoxConfig {
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.BAD_REQUEST.value()))
                         .description("Requisição inválida (erro do cliente)")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(getProblemaModelReference())
                         .build(),
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                         .description("Erro interno do Servidor")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(getProblemaModelReference())
                         .build(),
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()))
@@ -84,6 +89,8 @@ public class SpringFoxConfig {
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()))
                         .description("Requisição recusada porque o corpo está em um formato não suportado")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(getProblemaModelReference())
                         .build()
         );
     }
@@ -93,11 +100,21 @@ public class SpringFoxConfig {
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.BAD_REQUEST.value()))
                         .description("Requisição inválida (erro do cliente)")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(getProblemaModelReference())
                         .build(),
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                         .description("Erro interno do Servidor")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(getProblemaModelReference())
                         .build()
         );
+    }
+
+    private Consumer<RepresentationBuilder> getProblemaModelReference() {
+        return r -> r.model(m -> m.name("Problema")
+                .referenceModel(ref -> ref.key(k -> k.qualifiedModelName(
+                        q -> q.name("Problema").namespace("com.algaworks.algafood.api.exceptionhandler")))));
     }
 }
