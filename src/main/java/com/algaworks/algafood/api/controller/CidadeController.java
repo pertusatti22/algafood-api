@@ -12,6 +12,7 @@ import com.algaworks.algafood.domain.model.Cidade;
 import com.algaworks.algafood.domain.repository.CidadeRepository;
 import com.algaworks.algafood.domain.service.CadastroCidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,15 @@ public class CidadeController implements CidadeControllerOpenApi {
 
     @GetMapping(path = "/{cidadeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CidadeModel buscar(@PathVariable Long cidadeId) {
-        return cidadeModelAssembler.toModel(cadastroCidadeService.encontrar(cidadeId));
+        Cidade cidade = cadastroCidadeService.encontrar(cidadeId);
+
+        CidadeModel cidadeModel = cidadeModelAssembler.toModel(cidade);
+
+        cidadeModel.add(Link.of("http://localhost:8080/cidades/1"));
+        cidadeModel.add(Link.of("http://localhost:8080/cidades", "cidades"));
+        cidadeModel.getEstado().add(Link.of("http://localhost:8080/estados/1"));
+
+        return cidadeModel;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
