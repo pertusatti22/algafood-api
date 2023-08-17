@@ -133,4 +133,19 @@ public class AlgaLinks {
     public Link linkToCozinhas() {
         return linkToCozinhas(IanaLinkRelations.SELF.value());
     }
+
+    public Link linkToConfirmacaoPedido(String codigoPedido, String rel) {
+        return linkTo(methodOn(PedidoStatusController.class)
+                .confirmar(codigoPedido)).withRel(rel);
+    }
+
+    public Link linkToCancelamentoPedido(String codigoPedido, String rel) {
+        return linkTo(methodOn(PedidoStatusController.class)
+                .cancelar(codigoPedido)).withRel(rel);
+    }
+
+    public Link linkToEntregaPedido(String codigoPedido, String rel) {
+        return linkTo(methodOn(PedidoStatusController.class)
+                .entregar(codigoPedido)).withRel(rel);
+    }
 }
