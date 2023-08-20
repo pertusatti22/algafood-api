@@ -22,7 +22,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/cidades")
+@RequestMapping(path = "/v1/cidades")
 public class CidadeController implements CidadeControllerOpenApi {
 
     @Autowired
