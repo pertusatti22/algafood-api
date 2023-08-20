@@ -55,6 +55,9 @@ public class SpringFoxConfig {
                 .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
                 .directModelSubstitute(Links.class, LinksModelOpenApi.class)
                 .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, ProdutoModel.class),
+                        ProdutosModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(PagedModel.class, PedidoResumoModel.class),
                         PedidosResumoModelOpenApi.class))
                 .alternateTypeRules(AlternateTypeRules.newRule(
